@@ -114,7 +114,14 @@ export const ProfileUpdate = () => {
                 data-cy="image"
                 type="text"
               />
-              <ValidatedField id="profile-user" name="user" data-cy="user" label={translate('realworldjdlApp.profile.user')} type="select">
+              <ValidatedField
+                id="profile-user"
+                name="user"
+                data-cy="user"
+                label={translate('realworldjdlApp.profile.user')}
+                type="select"
+                required
+              >
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (
@@ -124,6 +131,9 @@ export const ProfileUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <ValidatedField
                 label={translate('realworldjdlApp.profile.follower')}
                 id="profile-follower"

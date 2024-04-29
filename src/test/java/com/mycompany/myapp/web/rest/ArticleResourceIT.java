@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.myapp.IntegrationTest;
 import com.mycompany.myapp.domain.Article;
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.ArticleRepository;
 import jakarta.persistence.EntityManager;
 import java.time.Instant;
@@ -100,6 +101,11 @@ class ArticleResourceIT {
             .body(DEFAULT_BODY)
             .createdAt(DEFAULT_CREATED_AT)
             .updatedAt(DEFAULT_UPDATED_AT);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        article.setUser(user);
         return article;
     }
 
@@ -117,6 +123,11 @@ class ArticleResourceIT {
             .body(UPDATED_BODY)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        article.setUser(user);
         return article;
     }
 

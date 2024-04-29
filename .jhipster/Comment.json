@@ -32,13 +32,15 @@
       "relationshipName": "user",
       "relationshipSide": "left",
       "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required",
       "relationshipWithBuiltInEntity": true
     },
     {
       "otherEntityName": "article",
       "relationshipName": "article",
       "relationshipSide": "left",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
   "searchEngine": "no"

@@ -144,7 +144,14 @@ export const CommentUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
-              <ValidatedField id="comment-user" name="user" data-cy="user" label={translate('realworldjdlApp.comment.user')} type="select">
+              <ValidatedField
+                id="comment-user"
+                name="user"
+                data-cy="user"
+                label={translate('realworldjdlApp.comment.user')}
+                type="select"
+                required
+              >
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (
@@ -154,12 +161,16 @@ export const CommentUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <ValidatedField
                 id="comment-article"
                 name="article"
                 data-cy="article"
                 label={translate('realworldjdlApp.comment.article')}
                 type="select"
+                required
               >
                 <option value="" key="0" />
                 {articles
@@ -170,6 +181,9 @@ export const CommentUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/comment" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

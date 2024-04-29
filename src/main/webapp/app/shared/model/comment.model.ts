@@ -7,8 +7,8 @@ export interface IComment {
   createdAt?: dayjs.Dayjs;
   updatedAt?: dayjs.Dayjs;
   body?: string;
-  user?: IUser | null;
-  article?: IArticle | null;
+  user?: IUser;
+  article?: IArticle;
 }
 
 export const defaultValue: Readonly<IComment> = {};

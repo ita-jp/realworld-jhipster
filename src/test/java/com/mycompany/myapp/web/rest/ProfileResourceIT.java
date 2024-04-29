@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.myapp.IntegrationTest;
 import com.mycompany.myapp.domain.Profile;
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.ProfileRepository;
 import jakarta.persistence.EntityManager;
 import java.util.ArrayList;
@@ -77,6 +78,11 @@ class ProfileResourceIT {
      */
     public static Profile createEntity(EntityManager em) {
         Profile profile = new Profile().bio(DEFAULT_BIO).image(DEFAULT_IMAGE);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        profile.setUser(user);
         return profile;
     }
 
@@ -88,6 +94,11 @@ class ProfileResourceIT {
      */
     public static Profile createUpdatedEntity(EntityManager em) {
         Profile profile = new Profile().bio(UPDATED_BIO).image(UPDATED_IMAGE);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        profile.setUser(user);
         return profile;
     }
 

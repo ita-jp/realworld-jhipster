@@ -11,7 +11,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.myapp.IntegrationTest;
+import com.mycompany.myapp.domain.Article;
 import com.mycompany.myapp.domain.Comment;
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.CommentRepository;
 import jakarta.persistence.EntityManager;
 import java.time.Instant;
@@ -74,6 +76,21 @@ class CommentResourceIT {
      */
     public static Comment createEntity(EntityManager em) {
         Comment comment = new Comment().createdAt(DEFAULT_CREATED_AT).updatedAt(DEFAULT_UPDATED_AT).body(DEFAULT_BODY);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        comment.setUser(user);
+        // Add required entity
+        Article article;
+        if (TestUtil.findAll(em, Article.class).isEmpty()) {
+            article = ArticleResourceIT.createEntity(em);
+            em.persist(article);
+            em.flush();
+        } else {
+            article = TestUtil.findAll(em, Article.class).get(0);
+        }
+        comment.setArticle(article);
         return comment;
     }
 
@@ -85,6 +102,21 @@ class CommentResourceIT {
      */
     public static Comment createUpdatedEntity(EntityManager em) {
         Comment comment = new Comment().createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT).body(UPDATED_BODY);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        comment.setUser(user);
+        // Add required entity
+        Article article;
+        if (TestUtil.findAll(em, Article.class).isEmpty()) {
+            article = ArticleResourceIT.createUpdatedEntity(em);
+            em.persist(article);
+            em.flush();
+        } else {
+            article = TestUtil.findAll(em, Article.class).get(0);
+        }
+        comment.setArticle(article);
         return comment;
     }
 

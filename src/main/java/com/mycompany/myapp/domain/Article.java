@@ -47,7 +47,8 @@ public class Article implements Serializable {
     @Column(name = "updated_at", nullable = false)
     private ZonedDateTime updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
+    @NotNull
     private User user;
 
     @ManyToMany(fetch = FetchType.LAZY)

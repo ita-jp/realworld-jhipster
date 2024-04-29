@@ -25,13 +25,13 @@ entity Tag {
 }
 
 relationship OneToOne {
-    Profile{user} to User with builtInEntity
+    Profile{user required} to User{required} with builtInEntity
 }
 
 relationship ManyToOne {
-    Article{user} to User  with builtInEntity
-    Comment{user} to User  with builtInEntity
-    Comment{article} to Article
+    Article{user required} to User  with builtInEntity
+    Comment{user required} to User  with builtInEntity
+    Comment{article required} to Article
 }
 
 relationship ManyToMany {

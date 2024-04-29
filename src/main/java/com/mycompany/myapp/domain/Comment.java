@@ -34,10 +34,12 @@ public class Comment implements Serializable {
     @Column(name = "body", nullable = false)
     private String body;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
+    @NotNull
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = { "user", "tags", "favoriteds" }, allowSetters = true)
     private Article article;
 

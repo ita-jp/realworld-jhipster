@@ -176,7 +176,14 @@ export const ArticleUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
-              <ValidatedField id="article-user" name="user" data-cy="user" label={translate('realworldjdlApp.article.user')} type="select">
+              <ValidatedField
+                id="article-user"
+                name="user"
+                data-cy="user"
+                label={translate('realworldjdlApp.article.user')}
+                type="select"
+                required
+              >
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (
@@ -186,6 +193,9 @@ export const ArticleUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <ValidatedField
                 label={translate('realworldjdlApp.article.tag')}
                 id="article-tag"

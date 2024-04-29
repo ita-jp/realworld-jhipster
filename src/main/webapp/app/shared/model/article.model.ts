@@ -10,7 +10,7 @@ export interface IArticle {
   body?: string;
   createdAt?: dayjs.Dayjs;
   updatedAt?: dayjs.Dayjs;
-  user?: IUser | null;
+  user?: IUser;
   tags?: ITag[] | null;
   favoriteds?: IUser[] | null;
 }

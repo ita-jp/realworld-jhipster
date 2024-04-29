@@ -4,7 +4,7 @@ export interface IProfile {
   id?: number;
   bio?: string | null;
   image?: string | null;
-  user?: IUser | null;
+  user?: IUser;
   followers?: IProfile[] | null;
   followees?: IProfile[] | null;
 }
