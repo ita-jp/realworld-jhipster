@@ -1,0 +1,8 @@
+entity Profile {
+    bio String
+    image String
+}
+
+relationship OneToOne {
+    Profile{user} to User with builtInEntity
+}

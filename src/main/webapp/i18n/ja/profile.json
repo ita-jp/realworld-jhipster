@@ -1,0 +1,26 @@
+{
+  "realworldjdlApp": {
+    "profile": {
+      "home": {
+        "title": "Profiles",
+        "refreshListLabel": "リストの更新",
+        "createLabel": "Profile の作成",
+        "createOrEditLabel": "Profileの作成または編集",
+        "notFound": "Profiles が見つかりません。"
+      },
+      "created": "新しい Profile がID {{ param }} で作成されました。",
+      "updated": "ID {{ param }} の Profile が更新されました。",
+      "deleted": "ID {{ param }} の Profile が削除されました。",
+      "delete": {
+        "question": "Profile {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Profile"
+      },
+      "id": "ID",
+      "bio": "Bio",
+      "image": "Image",
+      "user": "User"
+    }
+  }
+}
