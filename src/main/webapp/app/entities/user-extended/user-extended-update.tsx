@@ -8,13 +8,11 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IUser } from 'app/shared/model/user.model';
-import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
-import { getEntities as getProfiles } from 'app/entities/profile/profile.reducer';
-import { IProfile } from 'app/shared/model/profile.model';
-import { getEntity, updateEntity, createEntity, reset } from './profile.reducer';
+import { getEntities as getUserExtendeds } from 'app/entities/user-extended/user-extended.reducer';
+import { IUserExtended } from 'app/shared/model/user-extended.model';
+import { getEntity, updateEntity, createEntity, reset } from './user-extended.reducer';
 
-export const ProfileUpdate = () => {
+export const UserExtendedUpdate = () => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -22,15 +20,14 @@ export const ProfileUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const users = useAppSelector(state => state.userManagement.users);
-  const profiles = useAppSelector(state => state.profile.entities);
-  const profileEntity = useAppSelector(state => state.profile.entity);
-  const loading = useAppSelector(state => state.profile.loading);
-  const updating = useAppSelector(state => state.profile.updating);
-  const updateSuccess = useAppSelector(state => state.profile.updateSuccess);
+  const userExtendeds = useAppSelector(state => state.userExtended.entities);
+  const userExtendedEntity = useAppSelector(state => state.userExtended.entity);
+  const loading = useAppSelector(state => state.userExtended.loading);
+  const updating = useAppSelector(state => state.userExtended.updating);
+  const updateSuccess = useAppSelector(state => state.userExtended.updateSuccess);
 
   const handleClose = () => {
-    navigate('/profile');
+    navigate('/user-extended');
   };
 
   useEffect(() => {
@@ -40,8 +37,7 @@ export const ProfileUpdate = () => {
       dispatch(getEntity(id));
     }
 
-    dispatch(getUsers({}));
-    dispatch(getProfiles({}));
+    dispatch(getUserExtendeds({}));
   }, []);
 
   useEffect(() => {
@@ -57,11 +53,10 @@ export const ProfileUpdate = () => {
     }
 
     const entity = {
-      ...profileEntity,
+      ...userExtendedEntity,
       ...values,
-      user: users.find(it => it.id.toString() === values.user?.toString()),
-      followers: mapIdList(values.followers),
-      followees: mapIdList(values.followees),
+      users: mapIdList(values.users),
+      follows: mapIdList(values.follows),
     };
 
     if (isNew) {
@@ -75,18 +70,17 @@ export const ProfileUpdate = () => {
     isNew
       ? {}
       : {
-          ...profileEntity,
-          user: profileEntity?.user?.id,
-          followers: profileEntity?.followers?.map(e => e.id.toString()),
-          followees: profileEntity?.followees?.map(e => e.id.toString()),
+          ...userExtendedEntity,
+          users: userExtendedEntity?.users?.map(e => e.id.toString()),
+          follows: userExtendedEntity?.follows?.map(e => e.id.toString()),
         };
 
   return (
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="realworldjdlApp.profile.home.createOrEditLabel" data-cy="ProfileCreateUpdateHeading">
-            <Translate contentKey="realworldjdlApp.profile.home.createOrEditLabel">Create or edit a Profile</Translate>
+          <h2 id="realworldjdlApp.userExtended.home.createOrEditLabel" data-cy="UserExtendedCreateUpdateHeading">
+            <Translate contentKey="realworldjdlApp.userExtended.home.createOrEditLabel">Create or edit a UserExtended</Translate>
           </h2>
         </Col>
       </Row>
@@ -101,40 +95,22 @@ export const ProfileUpdate = () => {
                   name="id"
                   required
                   readOnly
-                  id="profile-id"
+                  id="user-extended-id"
                   label={translate('global.field.id')}
                   validate={{ required: true }}
                 />
               ) : null}
-              <ValidatedField label={translate('realworldjdlApp.profile.bio')} id="profile-bio" name="bio" data-cy="bio" type="text" />
               <ValidatedField
-                label={translate('realworldjdlApp.profile.image')}
-                id="profile-image"
-                name="image"
-                data-cy="image"
-                type="text"
-              />
-              <ValidatedField id="profile-user" name="user" data-cy="user" label={translate('realworldjdlApp.profile.user')} type="select">
-                <option value="" key="0" />
-                {users
-                  ? users.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField
-                label={translate('realworldjdlApp.profile.follower')}
-                id="profile-follower"
-                data-cy="follower"
+                label={translate('realworldjdlApp.userExtended.user')}
+                id="user-extended-user"
+                data-cy="user"
                 type="select"
                 multiple
-                name="followers"
+                name="users"
               >
                 <option value="" key="0" />
-                {profiles
-                  ? profiles.map(otherEntity => (
+                {userExtendeds
+                  ? userExtendeds.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>
@@ -142,23 +118,23 @@ export const ProfileUpdate = () => {
                   : null}
               </ValidatedField>
               <ValidatedField
-                label={translate('realworldjdlApp.profile.followee')}
-                id="profile-followee"
-                data-cy="followee"
+                label={translate('realworldjdlApp.userExtended.follow')}
+                id="user-extended-follow"
+                data-cy="follow"
                 type="select"
                 multiple
-                name="followees"
+                name="follows"
               >
                 <option value="" key="0" />
-                {profiles
-                  ? profiles.map(otherEntity => (
+                {userExtendeds
+                  ? userExtendeds.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>
                     ))
                   : null}
               </ValidatedField>
-              <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/profile" replace color="info">
+              <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/user-extended" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
                 <span className="d-none d-md-inline">
@@ -179,4 +155,4 @@ export const ProfileUpdate = () => {
   );
 };
 
-export default ProfileUpdate;
+export default UserExtendedUpdate;

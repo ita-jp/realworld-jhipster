@@ -21,6 +21,20 @@
       "relationshipSide": "left",
       "relationshipType": "one-to-one",
       "relationshipWithBuiltInEntity": true
+    },
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "followee",
+      "relationshipName": "follower",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "follower",
+      "relationshipName": "followee",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
     }
   ],
   "searchEngine": "no"

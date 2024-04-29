@@ -139,12 +139,17 @@ public class ProfileResource {
     /**
      * {@code GET  /profiles} : get all the profiles.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of profiles in body.
      */
     @GetMapping("")
-    public List<Profile> getAllProfiles() {
+    public List<Profile> getAllProfiles(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
         log.debug("REST request to get all Profiles");
-        return profileRepository.findAll();
+        if (eagerload) {
+            return profileRepository.findAllWithEagerRelationships();
+        } else {
+            return profileRepository.findAll();
+        }
     }
 
     /**
@@ -156,7 +161,7 @@ public class ProfileResource {
     @GetMapping("/{id}")
     public ResponseEntity<Profile> getProfile(@PathVariable("id") Long id) {
         log.debug("REST request to get Profile : {}", id);
-        Optional<Profile> profile = profileRepository.findById(id);
+        Optional<Profile> profile = profileRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(profile);
     }
 

@@ -1,6 +1,6 @@
 package com.mycompany.myapp.repository;
 
-import com.mycompany.myapp.domain.Profile;
+import com.mycompany.myapp.domain.UserExtended;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -9,22 +9,22 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
 /**
- * Spring Data JPA repository for the Profile entity.
+ * Spring Data JPA repository for the UserExtended entity.
  *
- * When extending this class, extend ProfileRepositoryWithBagRelationships too.
+ * When extending this class, extend UserExtendedRepositoryWithBagRelationships too.
  * For more information refer to https://github.com/jhipster/generator-jhipster/issues/17990.
  */
 @Repository
-public interface ProfileRepository extends ProfileRepositoryWithBagRelationships, JpaRepository<Profile, Long> {
-    default Optional<Profile> findOneWithEagerRelationships(Long id) {
+public interface UserExtendedRepository extends UserExtendedRepositoryWithBagRelationships, JpaRepository<UserExtended, Long> {
+    default Optional<UserExtended> findOneWithEagerRelationships(Long id) {
         return this.fetchBagRelationships(this.findById(id));
     }
 
-    default List<Profile> findAllWithEagerRelationships() {
+    default List<UserExtended> findAllWithEagerRelationships() {
         return this.fetchBagRelationships(this.findAll());
     }
 
-    default Page<Profile> findAllWithEagerRelationships(Pageable pageable) {
+    default Page<UserExtended> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
 }

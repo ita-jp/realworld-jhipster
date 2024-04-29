@@ -11,7 +11,8 @@
         "profile": "Profile",
         "article": "Article",
         "comment": "Comment",
-        "tag": "Tag"
+        "tag": "Tag",
+        "userExtended": "User Extended"
       },
       "account": {
         "main": "アカウント",

@@ -1,0 +1,25 @@
+{
+  "realworldjdlApp": {
+    "userExtended": {
+      "home": {
+        "title": "UserExtendeds",
+        "refreshListLabel": "リストの更新",
+        "createLabel": "User Extended の作成",
+        "createOrEditLabel": "User Extendedの作成または編集",
+        "notFound": "User Extendeds が見つかりません。"
+      },
+      "created": "新しい User Extended がID {{ param }} で作成されました。",
+      "updated": "ID {{ param }} の User Extended が更新されました。",
+      "deleted": "ID {{ param }} の User Extended が削除されました。",
+      "delete": {
+        "question": "User Extended {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "User Extended"
+      },
+      "id": "ID",
+      "user": "User",
+      "follow": "Follow"
+    }
+  }
+}

@@ -27,6 +27,20 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="20240429132828-1-relations" author="jhipster">
+
+        <createTable tableName="rel_profile__follower">
+            <column name="follower_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="profile_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="profile_id, follower_id" tableName="rel_profile__follower"/>
+    </changeSet>
+
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--

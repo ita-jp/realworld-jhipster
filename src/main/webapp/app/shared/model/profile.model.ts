@@ -5,6 +5,8 @@ export interface IProfile {
   bio?: string | null;
   image?: string | null;
   user?: IUser | null;
+  followers?: IProfile[] | null;
+  followees?: IProfile[] | null;
 }
 
 export const defaultValue: Readonly<IProfile> = {};

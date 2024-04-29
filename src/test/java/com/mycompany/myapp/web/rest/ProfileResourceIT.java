@@ -4,6 +4,7 @@ import static com.mycompany.myapp.domain.ProfileAsserts.*;
 import static com.mycompany.myapp.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -13,12 +14,18 @@ import com.mycompany.myapp.IntegrationTest;
 import com.mycompany.myapp.domain.Profile;
 import com.mycompany.myapp.repository.ProfileRepository;
 import jakarta.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,6 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link ProfileResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class ProfileResourceIT {
@@ -49,6 +57,9 @@ class ProfileResourceIT {
 
     @Autowired
     private ProfileRepository profileRepository;
+
+    @Mock
+    private ProfileRepository profileRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -136,6 +147,23 @@ class ProfileResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(profile.getId().intValue())))
             .andExpect(jsonPath("$.[*].bio").value(hasItem(DEFAULT_BIO)))
             .andExpect(jsonPath("$.[*].image").value(hasItem(DEFAULT_IMAGE)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllProfilesWithEagerRelationshipsIsEnabled() throws Exception {
+        when(profileRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restProfileMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(profileRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllProfilesWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(profileRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restProfileMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(profileRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test

@@ -8,9 +8,9 @@ import { ASC, DESC, SORT } from 'app/shared/util/pagination.constants';
 import { overrideSortStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { getEntities } from './profile.reducer';
+import { getEntities } from './user-extended.reducer';
 
-export const Profile = () => {
+export const UserExtended = () => {
   const dispatch = useAppDispatch();
 
   const pageLocation = useLocation();
@@ -18,8 +18,8 @@ export const Profile = () => {
 
   const [sortState, setSortState] = useState(overrideSortStateWithQueryParams(getSortState(pageLocation, 'id'), pageLocation.search));
 
-  const profileList = useAppSelector(state => state.profile.entities);
-  const loading = useAppSelector(state => state.profile.loading);
+  const userExtendedList = useAppSelector(state => state.userExtended.entities);
+  const loading = useAppSelector(state => state.userExtended.loading);
 
   const getAllEntities = () => {
     dispatch(
@@ -65,95 +65,82 @@ export const Profile = () => {
 
   return (
     <div>
-      <h2 id="profile-heading" data-cy="ProfileHeading">
-        <Translate contentKey="realworldjdlApp.profile.home.title">Profiles</Translate>
+      <h2 id="user-extended-heading" data-cy="UserExtendedHeading">
+        <Translate contentKey="realworldjdlApp.userExtended.home.title">User Extendeds</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="realworldjdlApp.profile.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="realworldjdlApp.userExtended.home.refreshListLabel">Refresh List</Translate>
           </Button>
-          <Link to="/profile/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+          <Link to="/user-extended/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="realworldjdlApp.profile.home.createLabel">Create new Profile</Translate>
+            <Translate contentKey="realworldjdlApp.userExtended.home.createLabel">Create new User Extended</Translate>
           </Link>
         </div>
       </h2>
       <div className="table-responsive">
-        {profileList && profileList.length > 0 ? (
+        {userExtendedList && userExtendedList.length > 0 ? (
           <Table responsive>
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="realworldjdlApp.profile.id">ID</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
-                </th>
-                <th className="hand" onClick={sort('bio')}>
-                  <Translate contentKey="realworldjdlApp.profile.bio">Bio</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('bio')} />
-                </th>
-                <th className="hand" onClick={sort('image')}>
-                  <Translate contentKey="realworldjdlApp.profile.image">Image</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('image')} />
+                  <Translate contentKey="realworldjdlApp.userExtended.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th>
-                  <Translate contentKey="realworldjdlApp.profile.user">User</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="realworldjdlApp.userExtended.user">User</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="realworldjdlApp.profile.follower">Follower</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="realworldjdlApp.profile.followee">Followee</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="realworldjdlApp.userExtended.follow">Follow</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
             </thead>
             <tbody>
-              {profileList.map((profile, i) => (
+              {userExtendedList.map((userExtended, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
                   <td>
-                    <Button tag={Link} to={`/profile/${profile.id}`} color="link" size="sm">
-                      {profile.id}
+                    <Button tag={Link} to={`/user-extended/${userExtended.id}`} color="link" size="sm">
+                      {userExtended.id}
                     </Button>
                   </td>
-                  <td>{profile.bio}</td>
-                  <td>{profile.image}</td>
-                  <td>{profile.user ? profile.user.id : ''}</td>
                   <td>
-                    {profile.followers
-                      ? profile.followers.map((val, j) => (
+                    {userExtended.users
+                      ? userExtended.users.map((val, j) => (
                           <span key={j}>
-                            <Link to={`/profile/${val.id}`}>{val.id}</Link>
-                            {j === profile.followers.length - 1 ? '' : ', '}
+                            <Link to={`/user-extended/${val.id}`}>{val.id}</Link>
+                            {j === userExtended.users.length - 1 ? '' : ', '}
                           </span>
                         ))
                       : null}
                   </td>
                   <td>
-                    {profile.followees
-                      ? profile.followees.map((val, j) => (
+                    {userExtended.follows
+                      ? userExtended.follows.map((val, j) => (
                           <span key={j}>
-                            <Link to={`/profile/${val.id}`}>{val.id}</Link>
-                            {j === profile.followees.length - 1 ? '' : ', '}
+                            <Link to={`/user-extended/${val.id}`}>{val.id}</Link>
+                            {j === userExtended.follows.length - 1 ? '' : ', '}
                           </span>
                         ))
                       : null}
                   </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`/profile/${profile.id}`} color="info" size="sm" data-cy="entityDetailsButton">
+                      <Button tag={Link} to={`/user-extended/${userExtended.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.view">View</Translate>
                         </span>
                       </Button>
-                      <Button tag={Link} to={`/profile/${profile.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
+                      <Button tag={Link} to={`/user-extended/${userExtended.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.edit">Edit</Translate>
                         </span>
                       </Button>
                       <Button
-                        onClick={() => (window.location.href = `/profile/${profile.id}/delete`)}
+                        onClick={() => (window.location.href = `/user-extended/${userExtended.id}/delete`)}
                         color="danger"
                         size="sm"
                         data-cy="entityDeleteButton"
@@ -172,7 +159,7 @@ export const Profile = () => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="realworldjdlApp.profile.home.notFound">No Profiles found</Translate>
+              <Translate contentKey="realworldjdlApp.userExtended.home.notFound">No User Extendeds found</Translate>
             </div>
           )
         )}
@@ -181,4 +168,4 @@ export const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserExtended;

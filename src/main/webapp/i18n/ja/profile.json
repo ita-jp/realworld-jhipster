@@ -20,7 +20,9 @@
       "id": "ID",
       "bio": "Bio",
       "image": "Image",
-      "user": "User"
+      "user": "User",
+      "follower": "Follower",
+      "followee": "Followee"
     }
   }
 }

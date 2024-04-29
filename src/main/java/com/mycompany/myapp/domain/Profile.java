@@ -1,7 +1,10 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Profile.
@@ -27,6 +30,19 @@ public class Profile implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private User user;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_profile__follower",
+        joinColumns = @JoinColumn(name = "profile_id"),
+        inverseJoinColumns = @JoinColumn(name = "follower_id")
+    )
+    @JsonIgnoreProperties(value = { "user", "followers", "followees" }, allowSetters = true)
+    private Set<Profile> followers = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "followers")
+    @JsonIgnoreProperties(value = { "user", "followers", "followees" }, allowSetters = true)
+    private Set<Profile> followees = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -79,6 +95,60 @@ public class Profile implements Serializable {
 
     public Profile user(User user) {
         this.setUser(user);
+        return this;
+    }
+
+    public Set<Profile> getFollowers() {
+        return this.followers;
+    }
+
+    public void setFollowers(Set<Profile> profiles) {
+        this.followers = profiles;
+    }
+
+    public Profile followers(Set<Profile> profiles) {
+        this.setFollowers(profiles);
+        return this;
+    }
+
+    public Profile addFollower(Profile profile) {
+        this.followers.add(profile);
+        return this;
+    }
+
+    public Profile removeFollower(Profile profile) {
+        this.followers.remove(profile);
+        return this;
+    }
+
+    public Set<Profile> getFollowees() {
+        return this.followees;
+    }
+
+    public void setFollowees(Set<Profile> profiles) {
+        if (this.followees != null) {
+            this.followees.forEach(i -> i.removeFollower(this));
+        }
+        if (profiles != null) {
+            profiles.forEach(i -> i.addFollower(this));
+        }
+        this.followees = profiles;
+    }
+
+    public Profile followees(Set<Profile> profiles) {
+        this.setFollowees(profiles);
+        return this;
+    }
+
+    public Profile addFollowee(Profile profile) {
+        this.followees.add(profile);
+        profile.getFollowers().add(this);
+        return this;
+    }
+
+    public Profile removeFollowee(Profile profile) {
+        this.followees.remove(profile);
+        profile.getFollowers().remove(this);
         return this;
     }
 

@@ -57,5 +57,10 @@ public class ProfileAsserts {
      * @param expected the expected entity
      * @param actual the actual entity
      */
-    public static void assertProfileUpdatableRelationshipsEquals(Profile expected, Profile actual) {}
+    public static void assertProfileUpdatableRelationshipsEquals(Profile expected, Profile actual) {
+        assertThat(expected)
+            .as("Verify Profile relationships")
+            .satisfies(e -> assertThat(e.getFollowers()).as("check followers").isEqualTo(actual.getFollowers()))
+            .satisfies(e -> assertThat(e.getFollowees()).as("check followees").isEqualTo(actual.getFollowees()));
+    }
 }

@@ -16,5 +16,19 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"
                                  />
+
+        <addForeignKeyConstraint baseColumnNames="profile_id"
+                                 baseTableName="rel_profile__follower"
+                                 constraintName="fk_rel_profile__follower__profile_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="follower_id"
+                                 baseTableName="rel_profile__follower"
+                                 constraintName="fk_rel_profile__follower__follower_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile"
+                                 />
     </changeSet>
 </databaseChangeLog>

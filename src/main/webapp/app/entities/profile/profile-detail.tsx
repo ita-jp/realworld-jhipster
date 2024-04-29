@@ -47,6 +47,32 @@ export const ProfileDetail = () => {
             <Translate contentKey="realworldjdlApp.profile.user">User</Translate>
           </dt>
           <dd>{profileEntity.user ? profileEntity.user.id : ''}</dd>
+          <dt>
+            <Translate contentKey="realworldjdlApp.profile.follower">Follower</Translate>
+          </dt>
+          <dd>
+            {profileEntity.followers
+              ? profileEntity.followers.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {profileEntity.followers && i === profileEntity.followers.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
+          <dt>
+            <Translate contentKey="realworldjdlApp.profile.followee">Followee</Translate>
+          </dt>
+          <dd>
+            {profileEntity.followees
+              ? profileEntity.followees.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {profileEntity.followees && i === profileEntity.followees.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
         </dl>
         <Button tag={Link} to="/profile" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

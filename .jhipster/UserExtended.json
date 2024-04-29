@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20240429145206"
+  },
+  "applications": "*",
+  "fields": [],
+  "name": "UserExtended",
+  "relationships": [
+    {
+      "otherEntityName": "userExtended",
+      "otherEntityRelationshipName": "follow",
+      "relationshipName": "user",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "userExtended",
+      "otherEntityRelationshipName": "user",
+      "relationshipName": "follow",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}
