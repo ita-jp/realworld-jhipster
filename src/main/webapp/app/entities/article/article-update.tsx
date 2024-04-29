@@ -64,6 +64,7 @@ export const ArticleUpdate = () => {
       ...values,
       user: users.find(it => it.id.toString() === values.user?.toString()),
       tags: mapIdList(values.tags),
+      favoriteds: mapIdList(values.favoriteds),
     };
 
     if (isNew) {
@@ -85,6 +86,7 @@ export const ArticleUpdate = () => {
           updatedAt: convertDateTimeFromServer(articleEntity.updatedAt),
           user: articleEntity?.user?.id,
           tags: articleEntity?.tags?.map(e => e.id.toString()),
+          favoriteds: articleEntity?.favoriteds?.map(e => e.id.toString()),
         };
 
   return (
@@ -195,6 +197,23 @@ export const ArticleUpdate = () => {
                 <option value="" key="0" />
                 {tags
                   ? tags.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('realworldjdlApp.article.favorited')}
+                id="article-favorited"
+                data-cy="favorited"
+                type="select"
+                multiple
+                name="favoriteds"
+              >
+                <option value="" key="0" />
+                {users
+                  ? users.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

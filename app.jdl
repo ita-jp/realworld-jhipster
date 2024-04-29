@@ -36,4 +36,5 @@ relationship ManyToOne {
 
 relationship ManyToMany {
     Article{tag} to Tag
+    Article{favorited} to User with builtInEntity
 }

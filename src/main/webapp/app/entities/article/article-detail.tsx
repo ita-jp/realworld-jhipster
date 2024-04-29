@@ -85,6 +85,19 @@ export const ArticleDetail = () => {
                 ))
               : null}
           </dd>
+          <dt>
+            <Translate contentKey="realworldjdlApp.article.favorited">Favorited</Translate>
+          </dt>
+          <dd>
+            {articleEntity.favoriteds
+              ? articleEntity.favoriteds.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {articleEntity.favoriteds && i === articleEntity.favoriteds.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
         </dl>
         <Button tag={Link} to="/article" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

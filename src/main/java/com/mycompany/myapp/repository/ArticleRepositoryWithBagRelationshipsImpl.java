@@ -24,7 +24,7 @@ public class ArticleRepositoryWithBagRelationshipsImpl implements ArticleReposit
 
     @Override
     public Optional<Article> fetchBagRelationships(Optional<Article> article) {
-        return article.map(this::fetchTags);
+        return article.map(this::fetchTags).map(this::fetchFavoriteds);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ArticleRepositoryWithBagRelationshipsImpl implements ArticleReposit
 
     @Override
     public List<Article> fetchBagRelationships(List<Article> articles) {
-        return Optional.of(articles).map(this::fetchTags).orElse(Collections.emptyList());
+        return Optional.of(articles).map(this::fetchTags).map(this::fetchFavoriteds).orElse(Collections.emptyList());
     }
 
     Article fetchTags(Article result) {
@@ -49,6 +49,24 @@ public class ArticleRepositoryWithBagRelationshipsImpl implements ArticleReposit
         IntStream.range(0, articles.size()).forEach(index -> order.put(articles.get(index).getId(), index));
         List<Article> result = entityManager
             .createQuery("select article from Article article left join fetch article.tags where article in :articles", Article.class)
+            .setParameter(ARTICLES_PARAMETER, articles)
+            .getResultList();
+        Collections.sort(result, (o1, o2) -> Integer.compare(order.get(o1.getId()), order.get(o2.getId())));
+        return result;
+    }
+
+    Article fetchFavoriteds(Article result) {
+        return entityManager
+            .createQuery("select article from Article article left join fetch article.favoriteds where article.id = :id", Article.class)
+            .setParameter(ID_PARAMETER, result.getId())
+            .getSingleResult();
+    }
+
+    List<Article> fetchFavoriteds(List<Article> articles) {
+        HashMap<Object, Integer> order = new HashMap<>();
+        IntStream.range(0, articles.size()).forEach(index -> order.put(articles.get(index).getId(), index));
+        List<Article> result = entityManager
+            .createQuery("select article from Article article left join fetch article.favoriteds where article in :articles", Article.class)
             .setParameter(ARTICLES_PARAMETER, articles)
             .getResultList();
         Collections.sort(result, (o1, o2) -> Integer.compare(order.get(o1.getId()), order.get(o2.getId())));

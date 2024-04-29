@@ -12,6 +12,7 @@ export interface IArticle {
   updatedAt?: dayjs.Dayjs;
   user?: IUser | null;
   tags?: ITag[] | null;
+  favoriteds?: IUser[] | null;
 }
 
 export const defaultValue: Readonly<IArticle> = {};

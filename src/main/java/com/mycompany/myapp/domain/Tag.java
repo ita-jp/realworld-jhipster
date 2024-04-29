@@ -28,7 +28,7 @@ public class Tag implements Serializable {
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags")
-    @JsonIgnoreProperties(value = { "user", "tags" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "tags", "favoriteds" }, allowSetters = true)
     private Set<Article> articles = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

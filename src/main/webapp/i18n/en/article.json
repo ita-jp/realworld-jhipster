@@ -25,7 +25,8 @@
       "createdAt": "Created At",
       "updatedAt": "Updated At",
       "user": "User",
-      "tag": "Tag"
+      "tag": "Tag",
+      "favorited": "Favorited"
     }
   }
 }

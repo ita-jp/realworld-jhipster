@@ -55,6 +55,14 @@ public class Article implements Serializable {
     @JsonIgnoreProperties(value = { "articles" }, allowSetters = true)
     private Set<Tag> tags = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_article__favorited",
+        joinColumns = @JoinColumn(name = "article_id"),
+        inverseJoinColumns = @JoinColumn(name = "favorited_id")
+    )
+    private Set<User> favoriteds = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -181,6 +189,29 @@ public class Article implements Serializable {
 
     public Article removeTag(Tag tag) {
         this.tags.remove(tag);
+        return this;
+    }
+
+    public Set<User> getFavoriteds() {
+        return this.favoriteds;
+    }
+
+    public void setFavoriteds(Set<User> users) {
+        this.favoriteds = users;
+    }
+
+    public Article favoriteds(Set<User> users) {
+        this.setFavoriteds(users);
+        return this;
+    }
+
+    public Article addFavorited(User user) {
+        this.favoriteds.add(user);
+        return this;
+    }
+
+    public Article removeFavorited(User user) {
+        this.favoriteds.remove(user);
         return this;
     }
 

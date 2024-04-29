@@ -30,5 +30,19 @@
                                  referencedColumnNames="id"
                                  referencedTableName="tag"
                                  />
+
+        <addForeignKeyConstraint baseColumnNames="article_id"
+                                 baseTableName="rel_article__favorited"
+                                 constraintName="fk_rel_article__favorited__article_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="favorited_id"
+                                 baseTableName="rel_article__favorited"
+                                 constraintName="fk_rel_article__favorited__favorited_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
     </changeSet>
 </databaseChangeLog>

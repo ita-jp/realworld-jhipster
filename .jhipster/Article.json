@@ -49,6 +49,13 @@
       "relationshipName": "tag",
       "relationshipSide": "left",
       "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "user",
+      "relationshipName": "favorited",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many",
+      "relationshipWithBuiltInEntity": true
     }
   ],
   "searchEngine": "no"

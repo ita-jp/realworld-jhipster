@@ -118,6 +118,9 @@ export const Article = () => {
                 <th>
                   <Translate contentKey="realworldjdlApp.article.tag">Tag</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th>
+                  <Translate contentKey="realworldjdlApp.article.favorited">Favorited</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -142,6 +145,16 @@ export const Article = () => {
                           <span key={j}>
                             <Link to={`/tag/${val.id}`}>{val.id}</Link>
                             {j === article.tags.length - 1 ? '' : ', '}
+                          </span>
+                        ))
+                      : null}
+                  </td>
+                  <td>
+                    {article.favoriteds
+                      ? article.favoriteds.map((val, j) => (
+                          <span key={j}>
+                            {val.id}
+                            {j === article.favoriteds.length - 1 ? '' : ', '}
                           </span>
                         ))
                       : null}

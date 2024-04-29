@@ -53,6 +53,17 @@
         </createTable>
 
         <addPrimaryKey columnNames="article_id, tag_id" tableName="rel_article__tag"/>
+
+        <createTable tableName="rel_article__favorited">
+            <column name="favorited_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="article_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="article_id, favorited_id" tableName="rel_article__favorited"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
