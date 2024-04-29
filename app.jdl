@@ -19,6 +19,11 @@ entity Comment {
     body String required
 }
 
+entity Tag {
+    id Integer required
+    name String required
+}
+
 relationship OneToOne {
     Profile{user} to User with builtInEntity
 }
@@ -27,4 +32,8 @@ relationship ManyToOne {
     Article{user} to User  with builtInEntity
     Comment{user} to User  with builtInEntity
     Comment{article} to Article
+}
+
+relationship ManyToMany {
+    Article{tag} to Tag
 }

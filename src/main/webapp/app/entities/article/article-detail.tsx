@@ -72,6 +72,19 @@ export const ArticleDetail = () => {
             <Translate contentKey="realworldjdlApp.article.user">User</Translate>
           </dt>
           <dd>{articleEntity.user ? articleEntity.user.id : ''}</dd>
+          <dt>
+            <Translate contentKey="realworldjdlApp.article.tag">Tag</Translate>
+          </dt>
+          <dd>
+            {articleEntity.tags
+              ? articleEntity.tags.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {articleEntity.tags && i === articleEntity.tags.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
         </dl>
         <Button tag={Link} to="/article" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

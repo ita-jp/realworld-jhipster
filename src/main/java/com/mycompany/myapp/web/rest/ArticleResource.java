@@ -155,12 +155,17 @@ public class ArticleResource {
     /**
      * {@code GET  /articles} : get all the articles.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of articles in body.
      */
     @GetMapping("")
-    public List<Article> getAllArticles() {
+    public List<Article> getAllArticles(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
         log.debug("REST request to get all Articles");
-        return articleRepository.findAll();
+        if (eagerload) {
+            return articleRepository.findAllWithEagerRelationships();
+        } else {
+            return articleRepository.findAll();
+        }
     }
 
     /**
@@ -172,7 +177,7 @@ public class ArticleResource {
     @GetMapping("/{id}")
     public ResponseEntity<Article> getArticle(@PathVariable("id") Long id) {
         log.debug("REST request to get Article : {}", id);
-        Optional<Article> article = articleRepository.findById(id);
+        Optional<Article> article = articleRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(article);
     }
 

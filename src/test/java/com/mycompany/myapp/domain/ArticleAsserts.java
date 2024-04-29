@@ -74,5 +74,9 @@ public class ArticleAsserts {
      * @param expected the expected entity
      * @param actual the actual entity
      */
-    public static void assertArticleUpdatableRelationshipsEquals(Article expected, Article actual) {}
+    public static void assertArticleUpdatableRelationshipsEquals(Article expected, Article actual) {
+        assertThat(expected)
+            .as("Verify Article relationships")
+            .satisfies(e -> assertThat(e.getTags()).as("check tags").isEqualTo(actual.getTags()));
+    }
 }

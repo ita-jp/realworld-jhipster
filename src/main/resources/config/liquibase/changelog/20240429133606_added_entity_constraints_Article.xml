@@ -16,5 +16,19 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"
                                  />
+
+        <addForeignKeyConstraint baseColumnNames="article_id"
+                                 baseTableName="rel_article__tag"
+                                 constraintName="fk_rel_article__tag__article_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tag_id"
+                                 baseTableName="rel_article__tag"
+                                 constraintName="fk_rel_article__tag__tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"
+                                 />
     </changeSet>
 </databaseChangeLog>

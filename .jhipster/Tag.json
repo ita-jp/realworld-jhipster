@@ -1,0 +1,21 @@
+{
+  "annotations": {
+    "changelogDate": "20240429135016"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Tag",
+  "relationships": [],
+  "searchEngine": "no"
+}

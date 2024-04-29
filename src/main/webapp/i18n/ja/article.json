@@ -24,7 +24,8 @@
       "body": "Body",
       "createdAt": "Created At",
       "updatedAt": "Updated At",
-      "user": "User"
+      "user": "User",
+      "tag": "Tag"
     }
   }
 }

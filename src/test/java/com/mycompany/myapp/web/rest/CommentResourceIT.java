@@ -314,6 +314,8 @@ class CommentResourceIT {
         Comment partialUpdatedComment = new Comment();
         partialUpdatedComment.setId(comment.getId());
 
+        partialUpdatedComment.createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
+
         restCommentMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedComment.getId())

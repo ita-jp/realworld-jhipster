@@ -38,7 +38,7 @@ public class Comment implements Serializable {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "tags" }, allowSetters = true)
     private Article article;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

@@ -10,6 +10,8 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IUser } from 'app/shared/model/user.model';
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
+import { ITag } from 'app/shared/model/tag.model';
+import { getEntities as getTags } from 'app/entities/tag/tag.reducer';
 import { IArticle } from 'app/shared/model/article.model';
 import { getEntity, updateEntity, createEntity, reset } from './article.reducer';
 
@@ -22,6 +24,7 @@ export const ArticleUpdate = () => {
   const isNew = id === undefined;
 
   const users = useAppSelector(state => state.userManagement.users);
+  const tags = useAppSelector(state => state.tag.entities);
   const articleEntity = useAppSelector(state => state.article.entity);
   const loading = useAppSelector(state => state.article.loading);
   const updating = useAppSelector(state => state.article.updating);
@@ -39,6 +42,7 @@ export const ArticleUpdate = () => {
     }
 
     dispatch(getUsers({}));
+    dispatch(getTags({}));
   }, []);
 
   useEffect(() => {
@@ -59,6 +63,7 @@ export const ArticleUpdate = () => {
       ...articleEntity,
       ...values,
       user: users.find(it => it.id.toString() === values.user?.toString()),
+      tags: mapIdList(values.tags),
     };
 
     if (isNew) {
@@ -79,6 +84,7 @@ export const ArticleUpdate = () => {
           createdAt: convertDateTimeFromServer(articleEntity.createdAt),
           updatedAt: convertDateTimeFromServer(articleEntity.updatedAt),
           user: articleEntity?.user?.id,
+          tags: articleEntity?.tags?.map(e => e.id.toString()),
         };
 
   return (
@@ -172,6 +178,23 @@ export const ArticleUpdate = () => {
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('realworldjdlApp.article.tag')}
+                id="article-tag"
+                data-cy="tag"
+                type="select"
+                multiple
+                name="tags"
+              >
+                <option value="" key="0" />
+                {tags
+                  ? tags.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>
