@@ -5,6 +5,7 @@ import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 
 import Profile from './profile';
 import Article from './article';
+import Comment from './comment';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -14,6 +15,7 @@ export default () => {
         {/* prettier-ignore */}
         <Route path="profile/*" element={<Profile />} />
         <Route path="article/*" element={<Article />} />
+        <Route path="comment/*" element={<Comment />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

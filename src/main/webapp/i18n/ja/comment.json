@@ -1,0 +1,28 @@
+{
+  "realworldjdlApp": {
+    "comment": {
+      "home": {
+        "title": "Comments",
+        "refreshListLabel": "リストの更新",
+        "createLabel": "Comment の作成",
+        "createOrEditLabel": "Commentの作成または編集",
+        "notFound": "Comments が見つかりません。"
+      },
+      "created": "新しい Comment がID {{ param }} で作成されました。",
+      "updated": "ID {{ param }} の Comment が更新されました。",
+      "deleted": "ID {{ param }} の Comment が削除されました。",
+      "delete": {
+        "question": "Comment {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Comment"
+      },
+      "id": "Id",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "body": "Body",
+      "user": "User",
+      "article": "Article"
+    }
+  }
+}

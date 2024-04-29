@@ -12,10 +12,19 @@ entity Article {
     updatedAt ZonedDateTime required
 }
 
+entity Comment {
+    id Integer required
+    createdAt ZonedDateTime required
+    updatedAt ZonedDateTime required
+    body String required
+}
+
 relationship OneToOne {
     Profile{user} to User with builtInEntity
 }
 
 relationship ManyToOne {
     Article{user} to User  with builtInEntity
+    Comment{user} to User  with builtInEntity
+    Comment{article} to Article
 }

@@ -9,7 +9,8 @@
         "main": "Entities",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
         "profile": "Profile",
-        "article": "Article"
+        "article": "Article",
+        "comment": "Comment"
       },
       "account": {
         "main": "Account",

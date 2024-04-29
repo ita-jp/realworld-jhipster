@@ -395,7 +395,7 @@ class ArticleResourceIT {
         Article partialUpdatedArticle = new Article();
         partialUpdatedArticle.setId(article.getId());
 
-        partialUpdatedArticle.slug(UPDATED_SLUG).title(UPDATED_TITLE).description(UPDATED_DESCRIPTION).createdAt(UPDATED_CREATED_AT);
+        partialUpdatedArticle.slug(UPDATED_SLUG).createdAt(UPDATED_CREATED_AT);
 
         restArticleMockMvc
             .perform(

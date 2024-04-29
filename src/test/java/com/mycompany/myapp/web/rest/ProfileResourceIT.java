@@ -256,8 +256,6 @@ class ProfileResourceIT {
         Profile partialUpdatedProfile = new Profile();
         partialUpdatedProfile.setId(profile.getId());
 
-        partialUpdatedProfile.bio(UPDATED_BIO).image(UPDATED_IMAGE);
-
         restProfileMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedProfile.getId())
