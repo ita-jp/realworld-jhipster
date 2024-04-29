@@ -1,0 +1,30 @@
+{
+  "realworldjdlApp": {
+    "article": {
+      "home": {
+        "title": "Articles",
+        "refreshListLabel": "リストの更新",
+        "createLabel": "Article の作成",
+        "createOrEditLabel": "Articleの作成または編集",
+        "notFound": "Articles が見つかりません。"
+      },
+      "created": "新しい Article がID {{ param }} で作成されました。",
+      "updated": "ID {{ param }} の Article が更新されました。",
+      "deleted": "ID {{ param }} の Article が削除されました。",
+      "delete": {
+        "question": "Article {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Article"
+      },
+      "id": "ID",
+      "slug": "Slug",
+      "title": "Title",
+      "description": "Description",
+      "body": "Body",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "author": "Author"
+    }
+  }
+}

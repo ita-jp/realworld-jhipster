@@ -3,6 +3,19 @@ entity Profile {
     image String
 }
 
+entity Article {
+    slug String required
+    title String required
+    description String required
+    body String required
+    createdAt ZonedDateTime required
+    updatedAt ZonedDateTime required
+}
+
 relationship OneToOne {
     Profile{user} to User with builtInEntity
+}
+
+relationship ManyToOne {
+    Article{author} to User{articles}  with builtInEntity
 }
