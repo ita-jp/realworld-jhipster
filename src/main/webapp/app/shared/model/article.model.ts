@@ -9,7 +9,7 @@ export interface IArticle {
   body?: string;
   createdAt?: dayjs.Dayjs;
   updatedAt?: dayjs.Dayjs;
-  author?: IUser | null;
+  user?: IUser | null;
 }
 
 export const defaultValue: Readonly<IArticle> = {};

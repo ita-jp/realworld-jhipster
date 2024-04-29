@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
-    @Query("select article from Article article where article.author.login = ?#{authentication.name}")
-    List<Article> findByAuthorIsCurrentUser();
+    @Query("select article from Article article where article.user.login = ?#{authentication.name}")
+    List<Article> findByUserIsCurrentUser();
 }

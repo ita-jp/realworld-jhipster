@@ -40,7 +40,7 @@
     {
       "otherEntityName": "user",
       "otherEntityRelationshipName": "articles",
-      "relationshipName": "author",
+      "relationshipName": "user",
       "relationshipSide": "left",
       "relationshipType": "many-to-one",
       "relationshipWithBuiltInEntity": true

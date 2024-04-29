@@ -69,9 +69,9 @@ export const ArticleDetail = () => {
           </dt>
           <dd>{articleEntity.updatedAt ? <TextFormat value={articleEntity.updatedAt} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
-            <Translate contentKey="realworldjdlApp.article.author">Author</Translate>
+            <Translate contentKey="realworldjdlApp.article.user">User</Translate>
           </dt>
-          <dd>{articleEntity.author ? articleEntity.author.id : ''}</dd>
+          <dd>{articleEntity.user ? articleEntity.user.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/article" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

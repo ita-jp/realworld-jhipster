@@ -17,5 +17,5 @@ relationship OneToOne {
 }
 
 relationship ManyToOne {
-    Article{author} to User{articles}  with builtInEntity
+    Article{user} to User{articles}  with builtInEntity
 }

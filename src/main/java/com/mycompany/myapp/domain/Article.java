@@ -45,7 +45,7 @@ public class Article implements Serializable {
     private ZonedDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User author;
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -140,16 +140,16 @@ public class Article implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public User getAuthor() {
-        return this.author;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setAuthor(User user) {
-        this.author = user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Article author(User user) {
-        this.setAuthor(user);
+    public Article user(User user) {
+        this.setUser(user);
         return this;
     }
 

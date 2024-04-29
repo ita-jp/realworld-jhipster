@@ -58,7 +58,7 @@ export const ArticleUpdate = () => {
     const entity = {
       ...articleEntity,
       ...values,
-      author: users.find(it => it.id.toString() === values.author?.toString()),
+      user: users.find(it => it.id.toString() === values.user?.toString()),
     };
 
     if (isNew) {
@@ -78,7 +78,7 @@ export const ArticleUpdate = () => {
           ...articleEntity,
           createdAt: convertDateTimeFromServer(articleEntity.createdAt),
           updatedAt: convertDateTimeFromServer(articleEntity.updatedAt),
-          author: articleEntity?.author?.id,
+          user: articleEntity?.user?.id,
         };
 
   return (
@@ -168,13 +168,7 @@ export const ArticleUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
-              <ValidatedField
-                id="article-author"
-                name="author"
-                data-cy="author"
-                label={translate('realworldjdlApp.article.author')}
-                type="select"
-              >
+              <ValidatedField id="article-user" name="user" data-cy="user" label={translate('realworldjdlApp.article.user')} type="select">
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (

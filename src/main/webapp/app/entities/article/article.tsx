@@ -113,7 +113,7 @@ export const Article = () => {
                   <FontAwesomeIcon icon={getSortIconByFieldName('updatedAt')} />
                 </th>
                 <th>
-                  <Translate contentKey="realworldjdlApp.article.author">Author</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="realworldjdlApp.article.user">User</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -132,7 +132,7 @@ export const Article = () => {
                   <td>{article.body}</td>
                   <td>{article.createdAt ? <TextFormat type="date" value={article.createdAt} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{article.updatedAt ? <TextFormat type="date" value={article.updatedAt} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{article.author ? article.author.id : ''}</td>
+                  <td>{article.user ? article.user.id : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/article/${article.id}`} color="info" size="sm" data-cy="entityDetailsButton">
