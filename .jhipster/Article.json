@@ -39,7 +39,6 @@
   "relationships": [
     {
       "otherEntityName": "user",
-      "otherEntityRelationshipName": "articles",
       "relationshipName": "user",
       "relationshipSide": "left",
       "relationshipType": "many-to-one",
